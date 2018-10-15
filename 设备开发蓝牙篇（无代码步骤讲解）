@@ -1,0 +1,28 @@
+1.首先申请微信认证服务号
+2.开通设备功能
+3.在设备功能里面添加设备，选择的连接方式为蓝牙
+4.在设备添加后，后有一个product_id生成
+5.通过这个链接https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=&secret=（补充对应得appid和secret）可得到access_token
+6.获取设备id，https://api.weixin.qq.com/device/getqrcode?access_token=&product_id=（补充对应参数access_token和product_id）可得到设备deviceid。
+7.微信蓝牙设备授权，https://api.weixin.qq.com/device/authorize_device?access_token=（补充参数acccess_token），在请求这个链接的时候需要用post
+  的提交方式，需要提交的参数格式为json，数据样例为：
+  {
+    "device_num":"1",
+    "device_list":[
+    {
+    "id":"",
+    "mac":"",
+    "connect_protocol":"3",
+    "auth_key":"",
+    "close_strategy":"1",
+    "conn_strategy":"1",
+    "crypt_method":"0",
+    "auth_ver":"1",
+    "manu_mac_pos":"-1",
+    "ser_mac_pos":"-2",
+    "ble_simple_protocol": "0"
+ }
+ ],
+ "op_type":"1"
+ }
+ 具体的参数设置可根据需要进行设置，单个参数解释可参照该链接：https://www.vxzsk.com/90.html  （注意mac地址需对应）
